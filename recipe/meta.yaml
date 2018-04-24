@@ -20,11 +20,9 @@ requirements:
   host:
     - python
     - pip
-    - pytest >=3.1
-    - psutil
   run:
     - python
-    - pytest >=3.1
+    - pytest >=2.8.0
     - psutil
 
 test:
