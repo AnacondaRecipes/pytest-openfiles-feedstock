@@ -1,7 +1,7 @@
 {% set name = "pytest-openfiles" %}
-{% set version = "0.5.0" %}
+{% set version = "0.6.0" %}
 {% set git_url = "https://github.com/astropy/pytest-openfiles" %}
-{% set sha256 = "179c2911d8aee3441fee051aba08e0d9b4dab61b829ae4811906d5c49a3b0a58" %}
+{% set sha256 = "ff5160c34eaada82b983a2c316fcccb30e0094630e97784471f015956870a993" %}
 
 package:
   name: {{ name|lower }}
@@ -9,13 +9,14 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pytest_openfiles-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
   noarch: python
   number: 0
   script: python -m pip install --no-deps --ignore-installed .
+  skip: true  # [py<37]
 
 requirements:
   host:
@@ -24,10 +25,14 @@ requirements:
     - pytest >=3.1
     - psutil
     - setuptools_scm
+    - setuptools >=30.3.0
+    - setuptools-scm
+    - wheel
   run:
     - python
-    - pytest >=3.1
+    - pytest >=4.6
     - psutil
+    - packaging
 
 test:
   imports:
@@ -38,7 +43,7 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.rst
-  summary: 'Pytest plugin for detecting inadvertent open file handles'
+  summary: Pytest plugin for detecting inadvertent open file handles
   description: |
     This package provides a plugin for the pytest framework that allows
     developers to detect whether any file handles or other file-like objects
